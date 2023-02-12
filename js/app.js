@@ -1,4 +1,6 @@
-function interes_cuotas( monto , cuotas ){ // calculara el interes de la cuota.
+
+
+function interes_cuotas( monto , cuotas ){ 
 
 
     if( cuotas == 6 ){
@@ -13,59 +15,117 @@ function interes_cuotas( monto , cuotas ){ // calculara el interes de la cuota.
 
     else if  ( cuotas == 18 ){
         let interes = monto * 0.90;
-        return interes
+        return interes;
     }
     
+    
+}
 
+const usuarios = [];
+const pago_cuota = [];
+
+
+
+class Usuario {
+    constructor ( nombre_apellido, monto, total, cuotas , pago_cuota){
+        this.nombre_apellido = nombre_apellido;
+        this.monto = monto;
+        this.cuotas = cuotas;
+        this.total = total;
+        this.pago_cuota = pago_cuota;
+
+    }
+
+    
+
+    get_datos(){
+        console.log("Bienvenido/a a Prestamos Online", this.nombre_apellido)
+        console.log("Cantidad de dinero solicitado: ", this.monto);
+        console.log("Cantidad de cuotas elegidas: ", this.cuotas);
+        console.log("Total a pagar con interes: ", this.total);
+        console.log("Vas a pagar por cuota: ", this.pago_cuota = (this.total/this.cuotas));
+        
+    }
 }
 
 
 
-let nombre_apellido = prompt("Ingrese su nombre y apellido")
+let nombre_apellido = prompt("Ingresa tu nombre y apellido")
 
-let monto = prompt("¿Cuanto dinero necesitas?");
-monto = parseInt(monto);
+let monto = parseInt(prompt("¿Cuanto dinero necesitas?"));
 
 let cuotas = prompt("¿En cuantas cuotas preferis pagarlo: 6, 12 o 18?");
 
-
-
 let total = monto + interes_cuotas(monto , cuotas);
 
-console.log("Bienvenido/a a Prestamos Online", nombre_apellido)
-console.log("Cantidad de dinero solicitado: ", monto);
-console.log("Cantidad de cuotas: ", cuotas);
-console.log("Total a pagar con interes: ", total);
-console.log("Vas a pagar por cuota: ", total/cuotas );
 
-
- 
+const user = new Usuario (nombre_apellido, monto, total, cuotas, pago_cuota);
+usuarios.push(user);  
+user.get_datos();
 
 let salida = prompt("Si queres volver a cotizar otro prestamo indica SEGUIR o SALIR para finalizar");
 
 
-while ( salida != "SALIR" ){
+
+while ( salida != "SALIR"){
    
     
 
     let nombre_apellido = prompt("Ingrese su nombre y apellido")
 
-    let monto = prompt("¿Cuanto dinero necesitas?");
-    monto = parseInt(monto);
-
+    let monto = parseInt(prompt("¿Cuanto dinero necesitas?"));
+   
     let cuotas = prompt("¿En cuantas cuotas preferis pagarlo: 6, 12 o 18?");
-
-
-
 
     let total = monto + interes_cuotas(monto , cuotas);
 
-    console.log("Bienvenido/a a Prestamos Online", nombre_apellido)
-    console.log("Cantidad de dinero solicitado: ", monto);
-    console.log("Cantidad de cuotas: ", cuotas);
-    console.log("Total a pagar con interes: ", total);
-    console.log("Vas a pagar por cuota: ", total/cuotas );
 
+    const user = new Usuario (nombre_apellido, monto, total, cuotas, pago_cuota);
+
+    usuarios.push(user);
+    
+    user.get_datos();
+
+       
+    
     salida = prompt ("Si queres volver a cotizar otro prestamo indica SEGUIR o SALIR para finalizar");
 
 }
+
+
+console.log(usuarios);
+
+
+
+
+function seleccion_usuario( user ) {
+    return user.nombre_apellido == buscar_usuario
+}
+
+console.log("Busqueda de usuario");
+
+const buscar_usuario = prompt ("BUSQUEDA DE USUARIO - Ingrese nombre y apellido");
+
+let resultado_busqueda = usuarios.find(seleccion_usuario);
+
+if (resultado_busqueda != undefined){
+
+    console.log("Usuario encontrado")
+}
+
+else{
+
+    console.log("No se encontro el usuario", buscar_usuario);
+}
+
+console.log( resultado_busqueda );
+
+console.log("Gracias por elegirnos - PRESTAMOS ONLINE");
+
+
+
+
+
+
+
+
