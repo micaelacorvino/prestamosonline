@@ -123,21 +123,22 @@ console.log( resultado_busqueda );
 console.log("Gracias por elegirnos - PRESTAMOS ONLINE");
 
 
+
+
 let btn = document.getElementById("boton");
 
 
 btn.addEventListener("click", function(){
-    let nombre = document.getElementById("nombre_apellido");
-    let email = document.getElementById("email");
-    let cantidad_dinero = document.getElementById("cantidad_dinero");
-    let cuotas_usuario = document.getElementById("cuotas_usuario");
+    
+    nombre_apellido = document.getElementById("nombre_apellido");
+    monto = document.getElementById("cantidad_dinero");
+    cuotas = document.getElementById("cuotas_usuario");
+    
     let lista = document.getElementById("lista");
     let li = document.createElement("li");
 
-    li.innerHTML = `<span>${nombre.value}</span>`;
+    li.innerHTML = `<span>${nombre_apellido.value}</span>`;
     
-    li.innerHTML = `<span>${email.value}</span>`;
-
     li.innerHTML = `<span>${cantidad_dinero.value}</span>`;
                     
     li.innerHTML = `<span>${cuotas_usuario.value}</span>`;
