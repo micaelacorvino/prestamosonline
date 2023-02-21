@@ -24,6 +24,7 @@ function interes_cuotas( monto , cuotas ){
 let form = document.getElementById("form");
 const arrayUser = []
 
+
 form.addEventListener("submit" , function(e){
     e.preventDefault()
 
@@ -31,29 +32,35 @@ form.addEventListener("submit" , function(e){
     let monto = document.getElementById("monto");
     let cuotas = document.getElementById("cuotas");
 
-    
+    /*const usuario = {
+        nombre: nombre_apellido.value,
+        monto: monto.value,
+        cuotas: cuotas.value,
+
+    }*/
     
 
     class Usuario {
         constructor ( nombre_apellido, monto, total, cuotas , pago_cuota){
-            this.nombre_apellido = nombre_apellido;
-            this.monto = monto;
-            this.cuotas = cuotas;
-            this.total = total;
-            this.pago_cuota = pago_cuota;
+            this.nombre_apellido = nombre_apellido.value;
+            this.monto = monto.value;
+            this.cuotas = cuotas.value;
+            this.total = total.value;
+            this.pago_cuota = pago_cuota.value;
 
         }
         
         
     }
 
-      let total = monto + interes_cuotas(monto , cuotas); 
     
-    const user = new Usuario (nombre_apellido, monto, total, cuotas, pago_cuota);
+    let total = monto + interes_cuotas(monto , cuotas); 
+
+    let pago_cuota = (this.total/this.cuotas);
+
+    /*const user = new Usuario (nombre_apellido, monto, total, cuotas, pago_cuota);
     const usuarios = [];
-    usuarios.push(user); 
-
-
+    usuarios.push(user); */
 
 
     let lista = document.getElementById("lista");
@@ -61,9 +68,11 @@ form.addEventListener("submit" , function(e){
     arrayUser.forEach((user) => {
         const div = document.createElement("div")
         div.innerHTML =
-        ` <li>${user.nombre_apellido}</li> 
+                    ` <li>${user.nombre_apellido}</li> 
                         <li>${user.monto}</li>
-                        <li>${user.cuotas}</li>`
+                        <li>${user.cuotas}</li>
+                        <li>${user.total}</li>
+                        <li>${user.pago_cuota}</li>`
         lista.append(div)
     })
 
