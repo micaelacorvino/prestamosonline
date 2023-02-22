@@ -1,6 +1,6 @@
 
 
-function interes_cuotas( monto , cuotas ){ 
+function interes_cuotas( monto , cuotas ){ // 4 paso va aca a ver cuantas cuotas.
 
 
     if( cuotas == 6 ){
@@ -21,62 +21,78 @@ function interes_cuotas( monto , cuotas ){
     
 }
 
+
 let form = document.getElementById("form");
+
+const usuarios = [] //primer paso declara las variables vacias, que luego van a absorver datos.
+
 const arrayUser = []
 
 
-form.addEventListener("submit" , function(e){
-    e.preventDefault()
 
-    let nombre_apellido = document.getElementById("nombre_apellido");
-    let monto = document.getElementById("monto");
-    let cuotas = document.getElementById("cuotas");
-
-    /*const usuario = {
-        nombre: nombre_apellido.value,
-        monto: monto.value,
-        cuotas: cuotas.value,
-
-    }*/
-    
-
-    class Usuario {
-        constructor ( nombre_apellido, monto, total, cuotas , pago_cuota){
-            this.nombre_apellido = nombre_apellido.value;
-            this.monto = monto.value;
-            this.cuotas = cuotas.value;
-            this.total = total.value;
-            this.pago_cuota = pago_cuota.value;
-
-        }
-        
+class Usuario {
+    constructor ( nombre, monto, cuotas, total, pago_cuota){
+        this.nombre = nombre;
+        this.monto = monto;
+        this.cuotas = cuotas;
+        this.total = total;
+        this.pago_cuota = pago_cuota;
         
     }
 
     
-    let total = monto + interes_cuotas(monto , cuotas); 
+}
 
-    let pago_cuota = (this.total/this.cuotas);
+    let total = monto + interes_cuotas(monto , cuotas);
+    const pago_cuota = (this.total/this.cuotas);
+    const user = new Usuario (nombre, monto, total, cuotas, pago_cuota);
+    
+    
 
-    /*const user = new Usuario (nombre_apellido, monto, total, cuotas, pago_cuota);
-    const usuarios = [];
-    usuarios.push(user); */
+form.addEventListener("submit", function(e){
+    e.preventDefault()
 
+
+    let nombre = document.getElementById("nombre"); // 2- tiene que ir a tomar el nombre, monto y cuotas.
+    let monto = document.getElementById("monto");
+    let cuotas = document.getElementById("cuotas");
+    
+        
+     //3- deberia tomar esta variable
+
+    const usuario = {
+        nombre: nombre.value,
+        monto: monto.value,
+        cuotas: cuotas.value,
+    }
+
+    
 
     let lista = document.getElementById("lista");
-    arrayUser.push(Usuario)
+
+    arrayUser.push(usuario)
+   
+
     arrayUser.forEach((user) => {
         const div = document.createElement("div")
-        div.innerHTML =
-                    ` <li>${user.nombre_apellido}</li> 
-                        <li>${user.monto}</li>
-                        <li>${user.cuotas}</li>
-                        <li>${user.total}</li>
-                        <li>${user.pago_cuota}</li>`
-        lista.append(div)
+        div.innerHTML = ` <p class="mt-3" >${user.nombre}</p> 
+                         <p>${user.monto}<p>
+                        <p>${user.cuotas}<p>
+                        <p>${user.total}</p> 
+                    <p>${user.pago_cuota}<p>`
+
+
+    lista.append(div);
+
+
     })
 
+    
 })
+
+
+
+
 
 
 let img = document.getElementById("img");
@@ -102,6 +118,123 @@ img.addEventListener("mouseout", function(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+/*
+function interes_cuotas( monto , cuotas ){ 
+
+
+    if( cuotas == 6 ){
+        let interes = monto * 0.25;
+        return interes
+    }
+
+    else if ( cuotas == 12 ){
+        let interes = monto * 0.50;
+        return interes
+    }
+
+    else if  ( cuotas == 18 ){
+        let interes = monto * 0.90;
+        return interes;
+    }
+    
+    
+}
+
+class Usuario {
+    constructor ( nombre_apellido, monto, cuotas){
+        this.nombre_apellido = nombre_apellido;
+        this.monto = monto;
+        this.cuotas = cuotas;
+    }
+}
+
+form.addEventListener("submit" , (e)=> {
+    e.preventDefault()
+
+    let nombre_apellido = document.getElementById("nombre_apellido");
+    let monto = document.getElementById("monto");
+    let cuotas = document.getElementById("cuotas");
+})
+    console.log(cuotas.value)
+
+    const usuario = new Usuario(nombre_apellido.value, parseInt(monto.value), parseInt(cuotas.value));
+    
+    console.log(usuario);
+
+    usuario.total = monto + interes_cuotas(monto , cuotas); 
+
+    usuario.pago_cuota = (this.total/this.cuotas);
+
+    console.log(usuario);
+
+/*
+let form = document.getElementById("form");
+const arrayUser = []
+
+
+form.addEventListener("submit" , function(e){
+    e.preventDefault()
+
+    let nombre_apellido = document.getElementById("nombre_apellido");
+    let monto = document.getElementById("monto");
+    let cuotas = document.getElementById("cuotas");
+
+    /*const usuario = {
+        nombre: nombre_apellido.value,
+        monto: monto.value,
+        cuotas: cuotas.value,
+
+    }*/
+    /*
+
+    class Usuario {
+        constructor ( nombre_apellido, monto, total, cuotas , pago_cuota){
+            this.nombre_apellido = nombre_apellido.value;
+            this.monto = monto.value;
+            this.cuotas = cuotas.value;
+            this.total = total.value;
+            this.pago_cuota = pago_cuota.value;
+
+        }
+        
+        
+    }
+
+    
+    let total = monto + interes_cuotas(monto , cuotas); 
+
+    let pago_cuota = (this.total/this.cuotas);
+
+    /*const user = new Usuario (nombre_apellido, monto, total, cuotas, pago_cuota);
+    const usuarios = [];
+    usuarios.push(user); */
+
+
+    /*let lista = document.getElementById("lista");
+    arrayUser.push(Usuario)
+    arrayUser.forEach((user) => {
+        const div = document.createElement("div")
+        div.innerHTML =
+                    ` <li>${user.nombre_apellido}</li> 
+                        <li>${user.monto}</li>
+                        <li>${user.cuotas}</li>
+                        <li>${user.total}</li>
+                        <li>${user.pago_cuota}</li>`
+        lista.append(div)
+    })
+
+})*/
 
 
 
