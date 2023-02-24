@@ -37,6 +37,8 @@ class Usuario {
 }
 
 
+    
+
 let form = document.getElementById("form");
 const arrayUser = [];
 
@@ -44,7 +46,7 @@ const arrayUser = [];
 if(localStorage.getItem("arrayUser")) {
     let datos_usuario = JSON.parse(localStorage.getItem("arrayUser"));
 
-    for(let i = 0 ; i < datos_usuario.lenght ; i++ ) {
+    for(let i = 0 ; i < datos_usuario.lenght ; i = i + 1 ) {
         arrayUser.push(datos_usuario[i]);
     }
 }
@@ -54,6 +56,7 @@ if(localStorage.getItem("arrayUser")) {
     
 form.addEventListener("submit", function(e){
     e.preventDefault()
+    
 
 
     let nombre = document.getElementById("nombre"); 
@@ -73,19 +76,18 @@ form.addEventListener("submit", function(e){
     }
 
     
-    
 
     let lista = document.getElementById("lista");
 
     arrayUser.push(usuario)
 
     localStorage.setItem ("arrayUser", JSON.stringify(arrayUser));
-    form.reset()
+    
 
-
-    console.log(arrayUser);
-
-
+    
+    
+    lista.innerHTML = "";
+    
     arrayUser.forEach((user) => {
         const div = document.createElement("div")
         div.innerHTML = ` <div>
@@ -98,11 +100,13 @@ form.addEventListener("submit", function(e){
 
     lista.append(div);
 
+    
 
     })
 
     
 })
+
 
 
 let img = document.getElementById("img");
