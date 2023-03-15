@@ -105,10 +105,11 @@ form.addEventListener("submit", function(e){
 
     })
 
+setTimeout(function(){
 
-    Swal.fire({
+ Swal.fire({
         title:"¿Querés seguir cotizando tus préstamos?",
-        text: "Si queres seguir apretá OK. Sino te esperamos pronto por aquí!",
+        text: "Si querés seguir apretá OK. Sino te esperamos pronto por aquí!",
         icon: "success",
         
         
@@ -123,9 +124,49 @@ form.addEventListener("submit", function(e){
         color:"green",
         background: "white",
     });
+       
+}, 6000);
+
+
 
     
 })
+
+
+
+
+
+
+
+
+
+let clima = document.getElementById("clima");
+
+let div_clima = document.getElementById("api_clima");
+
+function mostrar_posicion( posicion ){
+
+    let lat = posicion.coords.latitude;
+    let long = posicion.coords.longitude;
+    let key = "bbf8893c6e8030e157bb633d11a66e17";
+
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${key}&units=metric&lang=es`)
+        .then( response=> response.json() )
+        .then( data =>{
+                        div_clima.innerHTML = `<p class="text-dark mt-3 fw-bolder">${data.name}</p>
+                                                   <p class="text-dark fw-bolder">Temp:${data.main.temp}</p>
+                                                   <p class="text-dark fw-bolder">Clima:${data.weather[0].description}</p>`
+        })
+
+
+
+}
+
+   
+
+navigator.geolocation.getCurrentPosition( mostrar_posicion );
+
 
 
 
@@ -142,36 +183,5 @@ img.addEventListener("mouseout", function(){
     img.src = "img_uno.jpg";
 
 });
-
-
-
-
-
-let clima = document.getElementById("clima");
-
-function mostrar_posicion( posicion ){
-
-    let lat = posicion.coords.latitude;
-    let long = posicion.coords.longitude;
-    let key = "bbf8893c6e8030e157bb633d11a66e17";
-
-
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${key}&units=metric&lang=es`)
-        .then( response=> response.json() )
-        .then( data =>{
-                        document.body.innerHTML = `<p>${data.name}</p>
-                                                   <p>Temp:${data.main.temp}</p>
-                                                   <p>Clima:${data.weather[0].description}</p>`
-        })
-
-
-
-}
-
-   
-
-navigator.geolocation.getCurrentPosition( mostrar_posicion );
-
-
 
 
