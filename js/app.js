@@ -37,6 +37,7 @@ class Usuario {
 }
 
 
+
     
 
 let form = document.getElementById("form");
@@ -46,7 +47,7 @@ const arrayUser = [];
 if(localStorage.getItem("arrayUser")) {
     let datos_usuario = JSON.parse(localStorage.getItem("arrayUser"));
 
-    for(let i = 0 ; i < datos_usuario.lenght ; i = i + 1 ) {
+    for(let i = 0 ; i < datos_usuario.lenght ; i++ ) {
         arrayUser.push(datos_usuario[i]);
     }
 }
@@ -83,7 +84,7 @@ form.addEventListener("submit", function(e){
 
     localStorage.setItem ("arrayUser", JSON.stringify(arrayUser));
     
-
+    
     
     
     lista.innerHTML = "";
@@ -104,6 +105,25 @@ form.addEventListener("submit", function(e){
 
     })
 
+
+    Swal.fire({
+        title:"¿Querés seguir cotizando tus préstamos?",
+        text: "Si queres seguir apretá OK. Sino te esperamos pronto por aquí!",
+        icon: "success",
+        
+        
+        imageUrl:"logo_prestamosonline.png",
+    
+        showClass:{
+            popup: "animate__animated animate__bounceIn"
+        },
+        hideClass:{
+            popup:"animate__animated animate__flipOutY"
+        },
+        color:"green",
+        background: "white",
+    });
+
     
 })
 
@@ -122,3 +142,36 @@ img.addEventListener("mouseout", function(){
     img.src = "img_uno.jpg";
 
 });
+
+
+
+
+
+let clima = document.getElementById("clima");
+
+function mostrar_posicion( posicion ){
+
+    let lat = posicion.coords.latitude;
+    let long = posicion.coords.longitude;
+    let key = "bbf8893c6e8030e157bb633d11a66e17";
+
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${key}&units=metric&lang=es`)
+        .then( response=> response.json() )
+        .then( data =>{
+                        document.body.innerHTML = `<p>${data.name}</p>
+                                                   <p>Temp:${data.main.temp}</p>
+                                                   <p>Clima:${data.weather[0].description}</p>`
+        })
+
+
+
+}
+
+   
+
+navigator.geolocation.getCurrentPosition( mostrar_posicion );
+
+
+
+
