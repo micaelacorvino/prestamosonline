@@ -31,6 +31,12 @@ class Usuario {
             let interes = monto * 0.90;
             return interes;
         }
+
+        else {
+
+            alert("Número de cuotas incorrecto");
+            break;
+        }
         
         
     }
