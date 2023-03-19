@@ -32,12 +32,7 @@ class Usuario {
             return interes;
         }
 
-        else {
-
-            alert("Número de cuotas incorrecto");
-            break;
-        }
-        
+              
         
     }
 }
